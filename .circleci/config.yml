@@ -5,7 +5,7 @@ orbs:
   slack: circleci/slack@3.4.2
 
 jobs:
-  test:
+  build:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
       - image: circleci/postgres:10-alpine-postgis
@@ -13,12 +13,10 @@ jobs:
           POSTGRES_USER: sampleapp
           POSTGRES_DB: sampleapp
           DATABASE_URL: postgis://sampleapp@localhost:5432/sampleapp
-      - image: circleci/redis
-        
+      - image: circleci/redis     
     working_directory: /home/circleci/project
     steps:
       - checkout
-      # todo figure out how to target the template's requirements
       - python/load-cache
       - python/install-deps
       - python/save-cache
@@ -28,17 +26,18 @@ jobs:
             - run: yarn install --frozen-lockfile
 
       - run: sudo apt-get install -y postgresql-client
-
       - run: ./test.sh 
-      - slack/status:
-          channel: "#project-template"
-          only_for_branches: develop,master
-
-
+      - run: cd ../sampleapp
+      - run: circleci local execute --job test
+      
 
 workflows:
   version: 2.1
   test:
     jobs:
-      - test:
+      - build:
           context: lightmatter
+      - test_default:
+          context: lightmatter
+          depends:
+            build
