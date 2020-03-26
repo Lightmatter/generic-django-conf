@@ -35,9 +35,6 @@ workflows:
   version: 2.1
   test_template:
     jobs:
-      - build:
+      - test_template:
           context: lightmatter
-      - test_default:
-          context: lightmatter
-          depends:
-            build
+      
