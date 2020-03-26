@@ -5,7 +5,7 @@ orbs:
   slack: circleci/slack@3.4.2
 
 jobs:
-  build:
+  test_template:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
       - image: circleci/postgres:10-alpine-postgis
@@ -33,7 +33,7 @@ jobs:
 
 workflows:
   version: 2.1
-  test:
+  test_template:
     jobs:
       - build:
           context: lightmatter
