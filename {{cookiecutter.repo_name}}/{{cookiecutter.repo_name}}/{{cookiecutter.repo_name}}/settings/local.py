@@ -1,7 +1,7 @@
 from .base import *
 
 # if you want to test with debug off
-env.read_env(repo_root(".env"), SECRET_KEY="changeme")
+env.read_env(repo_root(".env"), SECRET_KEY="changeme")  # nosec
 
 ALLOWED_HOSTS = [u"127.0.0.1", "localhost"]
 DEBUG = True
