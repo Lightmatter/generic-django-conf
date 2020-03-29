@@ -16,6 +16,6 @@ watchdog
 astroid==2.3.3
 prospector==1.2.0
 pylint==2.4.4
-pylint-django==2.0.14
+pylint-django==2.0.12
 Werkzeug==1.0.0
 bandit==1.6.2
