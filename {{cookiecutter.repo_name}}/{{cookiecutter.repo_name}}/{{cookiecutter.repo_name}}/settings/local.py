@@ -22,7 +22,7 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = root("static")
 
 
-INSTALLED_APPS += ("debug_toolbar", "template_debug")
+INSTALLED_APPS += ("debug_toolbar",)
 
 MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
 
